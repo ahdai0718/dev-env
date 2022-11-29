@@ -7,3 +7,32 @@ services:
       - 7000-7005:7000-7005
     environment:
       - IP=0.0.0.0
+
+  postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=!QAZ2wsx
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 8081:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@ohdada.com
+      - PGADMIN_DEFAULT_PASSWORD=!QAZ2wsx
+
+  static-file-server:
+    image: halverneus/static-file-server
+    ports:
+      - 8000:8080
+    volumes:
+      - ./static-file-server/streaming-206:/web
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3306:3306 
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
